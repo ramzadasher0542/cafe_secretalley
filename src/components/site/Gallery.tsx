@@ -6,8 +6,9 @@ import { CONTACT } from "@/lib/cafe-data";
 import { GALLERY_TILES } from "@/lib/gallery-data";
 
 /**
- * Masonry gallery — tight interlocking grid with Ken Burns zoom on hover.
+ * Masonry gallery — CSS column-based layout with varying heights.
  * NO B&W filters — vibrant Kandy colors stay completely untouched.
+ * Premium hover:scale-105 micro-interaction on every image.
  *
  * To add photos: edit /src/lib/gallery-data.ts (instructions.md explains how)
  */
@@ -29,7 +30,7 @@ export function Gallery() {
           </p>
         </div>
 
-        {/* Tight interlocking masonry — Ken Burns zoom on hover */}
+        {/* Masonry layout — columns with varying heights, vibrant full-color images */}
         <div className="masonry columns-2 lg:columns-3 xl:columns-4">
           {GALLERY_TILES.map((t, i) => (
             <motion.figure
@@ -38,23 +39,24 @@ export function Gallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: (i % 4) * 0.08, ease: "easeOut" }}
-              className="kenburns-hover relative rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-shadow group bg-espresso"
+              className="relative rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 group bg-espresso mb-3"
             >
+              {/* Image — full vibrant color, hover:scale-105 micro-interaction */}
               <img
                 src={t.src}
                 alt={t.alt}
                 loading="lazy"
-                className={`w-full object-cover ${
+                className={`w-full object-cover hover:scale-105 transition-transform duration-500 ease-out ${
                   t.tall ? "aspect-[3/4]" : t.wide ? "aspect-[4/3]" : "aspect-square"
                 }`}
               />
-              {/* Vibrant colors untouched — only a soft cream gradient at the bottom for caption legibility */}
-              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-espresso/60 to-transparent pointer-events-none" />
+              {/* Soft cream-to-transparent gradient at bottom for caption — NOT a dark overlay */}
+              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-espresso/50 to-transparent pointer-events-none" />
               <figcaption className="absolute bottom-3 left-0 right-0 text-center font-chalk text-base sm:text-lg text-cream text-shadow-soft px-2">
                 {t.caption}
               </figcaption>
               {/* Corner accent on hover */}
-              <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-cyan opacity-0 group-hover:opacity-100 transition-opacity grid place-items-center">
+              <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-cyan opacity-0 group-hover:opacity-100 transition-opacity duration-300 grid place-items-center">
                 <ArrowUpRight className="w-4 h-4 text-espresso" />
               </div>
             </motion.figure>

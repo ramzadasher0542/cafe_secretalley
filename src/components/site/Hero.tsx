@@ -6,20 +6,20 @@ import { CONTACT } from "@/lib/cafe-data";
 
 const SLIDES = [
   {
-    src: "/images-optimized/hero-exterior.webp",
-    alt: "Outdoor blue wall with large yellow SECRET text at Cafe Secret Alley",
+    src: "/images-optimized/dashboardpic1.webp",
+    alt: "Cafe Secret Alley — hero image 1",
     caption: "The Yellow & Blue Wall",
     sub: "Find the door. Slide in.",
   },
   {
-    src: "/images-optimized/hero-interior.webp",
-    alt: "Bright yellow cafe interior with wooden accents",
+    src: "/images-optimized/dashboardpic2.webp",
+    alt: "Cafe Secret Alley — hero image 2",
     caption: "The Interior",
     sub: "Sunshine on the inside too.",
   },
   {
-    src: "/images-optimized/alley-minions.webp",
-    alt: "Colorful artsy alleyway with vibrant street art at Cafe Secret Alley",
+    src: "/images-optimized/dashboardpic3.webp",
+    alt: "Cafe Secret Alley — hero image 3",
     caption: "The Alley",
     sub: "Street art, music, and good coffee.",
   },
@@ -59,34 +59,49 @@ export function Hero() {
         </div>
       ))}
 
-      {/* === Content === — text floats on a frosted glass card, NO image dimming */}
+      {/* === Content === — text floats on a premium frosted glass card, NO image dimming */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[100svh] flex flex-col justify-center pt-24 pb-28">
         <div className="max-w-2xl">
-          {/* Glass card */}
-          <div className="glass rounded-[28px] p-7 sm:p-10 hover-lift">
+          {/* Premium Glassmorphic Card */}
+          <div className="backdrop-blur-lg bg-white/10 border border-white/20 rounded-[32px] p-8 sm:p-12 shadow-[0_8px_32px_rgba(26,18,11,0.2),inset_0_1px_0_rgba(255,255,255,0.4)] hover-lift">
+            {/* Logo prominently featured */}
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-14 h-14 rounded-full overflow-hidden ring-2 ring-white/30 shadow-lg">
+                <img
+                  src="/images-optimized/logo-nav.webp"
+                  alt="Cafe Secret Alley logo"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <div className="font-display text-lg text-white text-shadow-soft tracking-wide">SECRET ALLEY</div>
+                <div className="font-chalk text-sm text-sun text-shadow-soft">kandy · est. hidden</div>
+              </div>
+            </div>
+
             {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 bg-sun text-espresso px-3 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-5 shadow-md">
+            <div className="inline-flex items-center gap-2 bg-sun text-espresso px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-6 shadow-md">
               <span className="w-1.5 h-1.5 rounded-full bg-espresso animate-pulse" />
               Kandy · Sri Lanka
             </div>
 
-            {/* Headline — dark text on the light glass card = readable without dimming image */}
-            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl text-espresso leading-[0.92] tracking-tight">
+            {/* Headline — white text on glass for maximum contrast without darkening image */}
+            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl text-white leading-[0.92] tracking-tight text-shadow-strong">
               Kandy&rsquo;s Best
               <br />
-              Kept <span className="text-cyan-deep">Secret</span>
+              Kept <span className="text-cyan">Secret</span>
             </h1>
 
             {/* Subheadline */}
-            <p className="mt-5 text-base sm:text-lg text-espresso/85 max-w-xl leading-relaxed font-medium">
+            <p className="mt-6 text-base sm:text-lg text-white/90 max-w-xl leading-relaxed font-medium text-shadow-soft">
               A vibrant modern Australian–Sri Lankan fusion café hidden in the heart of the city.{" "}
-              <span className="font-bold text-espresso">Specialty coffee</span>,{" "}
-              <span className="font-bold text-espresso">all-day brunch</span>, and{" "}
-              <span className="font-bold text-espresso">curated cocktails</span>.
+              <span className="font-bold text-sun">Specialty coffee</span>,{" "}
+              <span className="font-bold text-cyan-glow">all-day brunch</span>, and{" "}
+              <span className="font-bold text-sun">curated cocktails</span>.
             </p>
 
-            {/* CTAs — hover-lift on primary */}
-            <div className="mt-7 flex flex-col sm:flex-row gap-3">
+            {/* CTAs */}
+            <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <a
                 href="#menu"
                 className="group inline-flex items-center justify-center gap-2 bg-espresso text-cream px-7 py-4 rounded-full font-display text-base tracking-wide shadow-lg hover:bg-cyan hover:text-espresso hover:-translate-y-1 transition-all duration-300"
@@ -120,7 +135,7 @@ export function Hero() {
         <button
           onClick={prev}
           aria-label="Previous slide"
-          className="w-11 h-11 rounded-full glass text-cream grid place-items-center hover:bg-sun hover:text-espresso transition-colors"
+          className="w-11 h-11 rounded-full backdrop-blur-md bg-white/10 border border-white/20 text-cream grid place-items-center hover:bg-sun hover:text-espresso transition-colors shadow-lg"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
@@ -132,7 +147,7 @@ export function Hero() {
         <button
           onClick={next}
           aria-label="Next slide"
-          className="w-11 h-11 rounded-full glass text-cream grid place-items-center hover:bg-sun hover:text-espresso transition-colors"
+          className="w-11 h-11 rounded-full backdrop-blur-md bg-white/10 border border-white/20 text-cream grid place-items-center hover:bg-sun hover:text-espresso transition-colors shadow-lg"
         >
           <ChevronRight className="w-5 h-5" />
         </button>

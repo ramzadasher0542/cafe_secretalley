@@ -60,7 +60,7 @@ export function VisitUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="bg-cream-2 rounded-3xl p-6 shadow-md border border-espresso/8 hover:shadow-xl hover:-translate-y-1 hover:border-cyan/40 transition-all"
+              className="bg-cream-2 rounded-3xl p-6 shadow-md border border-espresso/8 hover:shadow-xl hover:-translate-y-1 hover:border-cyan/40 transition-all duration-300"
             >
               <div className={`w-12 h-12 rounded-2xl ${c.accent} grid place-items-center mb-4 shadow-sm`}>
                 <c.icon className="w-6 h-6" />

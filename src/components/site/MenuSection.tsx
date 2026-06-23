@@ -13,38 +13,55 @@ const TAG_STYLES: Record<string, string> = {
 
 /**
  * Bento box grid — asymmetric layout.
- * Caffeine Supply spans 2 rows (tall left card).
- * To restructure, edit the className strings on each motion.div below.
+ * Caffeine Supply spans 2 rows + 2 cols (hero card).
+ * Breakfast spans 2 cols (wide).
+ * Creates an interlocking, magazine-style layout.
  */
 export function MenuSection() {
-  // Find each category once for the bento layout
   const caffeine = MENU.find((c) => c.id === "caffeine-supply")!;
   const smoothie = MENU.find((c) => c.id === "smoothie-bowls")!;
   const breakfast = MENU.find((c) => c.id === "all-day-breakfast")!;
   const cakes = MENU.find((c) => c.id === "cakes-and-bakes")!;
   const drinks = MENU.find((c) => c.id === "drinks")!;
 
-  const renderCard = (cat: typeof caffeine, accent: string) => (
-    <div className="relative h-full rounded-3xl slate-texture p-6 sm:p-7 overflow-hidden hover:border-cyan/40 transition-colors border border-cream/10">
+  const renderCard = (
+    cat: typeof caffeine,
+    accent: string,
+    isHero?: boolean
+  ) => (
+    <div
+      className={`relative h-full rounded-3xl slate-texture overflow-hidden border border-cream/10 hover:border-cyan/40 transition-all duration-500 ${
+        isHero ? "p-8 sm:p-10" : "p-6 sm:p-7"
+      }`}
+    >
       {/* Category header */}
       <div className="mb-5 pb-4 border-b border-dashed border-cream/20 relative z-10">
-        <h3 className="font-display text-2xl sm:text-3xl tracking-wide" style={{ color: accent }}>
+        <h3
+          className={`font-display tracking-wide ${
+            isHero ? "text-3xl sm:text-4xl lg:text-5xl" : "text-2xl sm:text-3xl"
+          }`}
+          style={{ color: accent }}
+        >
           {cat.title}
         </h3>
         <p className="font-chalk text-lg text-cream/65 mt-1">{cat.subtitle}</p>
       </div>
 
       {/* Items */}
-      <ul className="space-y-4 relative z-10">
+      <ul className={`relative z-10 ${isHero ? "space-y-5" : "space-y-4"}`}>
         {cat.items.map((item) => (
           <li key={item.name} className="group/item">
             <div className="flex items-baseline gap-2">
-              <span className="font-chalk text-lg sm:text-xl text-cream group-hover/item:text-sun transition-colors">
+              <span
+                className={`font-chalk text-cream group-hover/item:text-sun transition-colors ${
+                  isHero ? "text-xl sm:text-2xl" : "text-lg sm:text-xl"
+                }`}
+              >
                 {item.name}
               </span>
               <span className="flex-1 border-b border-dotted border-cream/30 translate-y-[-3px]" />
               {item.price && (
-                <span className="font-display text-lg text-sun whitespace-nowrap">
+                <span className="font-marker text-xl text-sun whitespace-nowrap">
                   {item.price}
                 </span>
               )}
@@ -71,6 +88,13 @@ export function MenuSection() {
       <div className="absolute -top-2 -right-2 font-chalk text-sun/30 text-4xl rotate-12 select-none pointer-events-none">
         ✦
       </div>
+
+      {/* Hero card: extra decorative element */}
+      {isHero && (
+        <div className="absolute bottom-4 right-4 font-marker text-cyan/20 text-6xl sm:text-8xl rotate-[-8deg] select-none pointer-events-none">
+          ☕
+        </div>
+      )}
     </div>
   );
 
@@ -98,20 +122,27 @@ export function MenuSection() {
           </p>
         </div>
 
-        {/* Bento box grid — asymmetric, Caffeine Supply spans 2 rows */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 auto-rows-[minmax(220px,auto)]">
-          {/* Caffeine Supply — spans 2 rows on large screens */}
+        {/* ── Asymmetric Bento Box Grid ──
+         * Desktop (lg): 4 columns
+         *   Row 1: Caffeine (2 cols, 2 rows = HERO) | Smoothie (1 col) | Breakfast (1 col, 2 rows)
+         *   Row 2: [Caffeine cont.]                  | Cakes (1 col)    | [Breakfast cont.]
+         *   Row 3: Drinks (full width, 4 cols)
+         *
+         * This creates true asymmetric bento — no two cards are the same size.
+         */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 auto-rows-[minmax(240px,auto)]">
+          {/* Caffeine Supply — HERO card: spans 2 cols × 2 rows */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="lg:col-span-1 lg:row-span-2"
+            className="md:col-span-2 lg:col-span-2 lg:row-span-2"
           >
-            {renderCard(caffeine, "#42D2E0")}
+            {renderCard(caffeine, "#28C4D9", true)}
           </motion.div>
 
-          {/* Smoothie Bowls — top middle */}
+          {/* Smoothie Bowls — standard card, top right */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -119,21 +150,21 @@ export function MenuSection() {
             transition={{ duration: 0.5, delay: 0.05, ease: "easeOut" }}
             className="lg:col-span-1"
           >
-            {renderCard(smoothie, "#FEF852")}
+            {renderCard(smoothie, "#FFD500")}
           </motion.div>
 
-          {/* All Day Breakfast — top right (wide) */}
+          {/* All Day Breakfast — tall card: spans 2 rows */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-            className="lg:col-span-2"
+            className="lg:col-span-1 lg:row-span-2"
           >
             {renderCard(breakfast, "#83E3B3")}
           </motion.div>
 
-          {/* Cakes & Bakes — bottom middle */}
+          {/* Cakes & Bakes — standard card */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -141,18 +172,18 @@ export function MenuSection() {
             transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
             className="lg:col-span-1"
           >
-            {renderCard(cakes, "#FEF852")}
+            {renderCard(cakes, "#FFD500")}
           </motion.div>
 
-          {/* Drinks — bottom right (wide) */}
+          {/* Drinks — full-width banner card at the bottom */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-            className="lg:col-span-2"
+            className="md:col-span-2 lg:col-span-4"
           >
-            {renderCard(drinks, "#42D2E0")}
+            {renderCard(drinks, "#28C4D9")}
           </motion.div>
         </div>
 

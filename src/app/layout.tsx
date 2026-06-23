@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
-import { Bungee, Caveat, Kalam, Permanent_Marker, Plus_Jakarta_Sans } from "next/font/google";
+import { Bungee, Caveat, Kalam, Outfit, Permanent_Marker, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -79,7 +85,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${jakarta.variable} ${bungee.variable} ${kalam.variable} ${permanent.variable} ${caveat.variable} antialiased bg-background text-foreground font-sans`}
+        className={`${outfit.variable} ${jakarta.variable} ${bungee.variable} ${kalam.variable} ${permanent.variable} ${caveat.variable} antialiased bg-background text-foreground font-sans`}
       >
         {children}
         <Toaster />

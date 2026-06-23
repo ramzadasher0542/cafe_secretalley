@@ -26,28 +26,31 @@ export function Header() {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-cream/85 backdrop-blur-xl shadow-[0_2px_24px_rgba(33,36,36,0.08)] py-2"
-          : "bg-transparent py-3"
+          ? "backdrop-blur-2xl bg-espresso/90 shadow-[0_4px_32px_rgba(0,0,0,0.35)] py-2"
+          : "backdrop-blur-xl bg-espresso/70 shadow-[0_2px_16px_rgba(0,0,0,0.2)] py-3"
       }`}
+      style={{
+        borderBottom: "1px solid rgba(249, 246, 240, 0.08)",
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
-        {/* Logo — uses the actual SA Logo.jpg */}
+        {/* Logo — uses the actual SA Logo */}
         <a href="#top" className="flex items-center gap-3 group" aria-label="Cafe Secret Alley home">
           <div className="relative">
-            <div className="w-11 h-11 rounded-full overflow-hidden ring-2 ring-cyan/40 group-hover:ring-cyan group-hover:rotate-6 transition-all shadow-md">
+            <div className="w-11 h-11 rounded-full overflow-hidden ring-2 ring-cyan/50 group-hover:ring-cyan group-hover:rotate-6 transition-all shadow-md">
               <img
                 src="/images-optimized/logo-nav.webp"
                 alt="Cafe Secret Alley logo"
                 className="w-full h-full object-cover"
               />
             </div>
-            <span className="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-sun border-2 border-cream" />
+            <span className="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-sun border-2 border-espresso" />
           </div>
           <div className="leading-none">
-            <div className="font-display text-[15px] sm:text-base text-espresso tracking-wide">
+            <div className="font-display text-[15px] sm:text-base text-cream tracking-wide">
               SECRET ALLEY
             </div>
-            <div className="font-chalk text-sm text-wood -mt-0.5">kandy · est. hidden</div>
+            <div className="font-chalk text-sm text-sun/80 -mt-0.5">kandy · est. hidden</div>
           </div>
         </a>
 
@@ -57,7 +60,7 @@ export function Header() {
             <a
               key={l.href}
               href={l.href}
-              className="relative px-3.5 py-2 text-sm font-semibold text-espresso/80 hover:text-espresso transition-colors rounded-full hover:bg-sun/30"
+              className="relative px-3.5 py-2 text-sm font-semibold text-cream/80 hover:text-sun transition-colors rounded-full hover:bg-white/10"
             >
               {l.label}
             </a>
@@ -69,7 +72,7 @@ export function Header() {
             href={CONTACT.ubereats}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 bg-espresso text-cream px-4 py-2 rounded-full text-sm font-bold hover:bg-cyan hover:text-espresso transition-colors shadow-sm"
+            className="inline-flex items-center gap-1.5 bg-cyan text-espresso px-4 py-2 rounded-full text-sm font-bold hover:bg-sun hover:text-espresso transition-colors shadow-md"
           >
             Order on UberEats
           </a>
@@ -77,7 +80,7 @@ export function Header() {
 
         <button
           onClick={() => setOpen((v) => !v)}
-          className="md:hidden inline-grid place-items-center w-10 h-10 rounded-full bg-espresso text-cyan shadow-sm"
+          className="md:hidden inline-grid place-items-center w-10 h-10 rounded-full bg-cyan text-espresso shadow-md"
           aria-expanded={open}
           aria-label="Toggle menu"
         >
@@ -91,15 +94,15 @@ export function Header() {
           open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="bg-cream/98 backdrop-blur-md h-full px-6 py-8 flex flex-col gap-2 overflow-y-auto">
+        <div className="bg-espresso/95 backdrop-blur-2xl h-full px-6 py-8 flex flex-col gap-2 overflow-y-auto">
           {NAV_LINKS.map((l, i) => (
             <a
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="text-3xl font-display text-espresso border-b border-espresso/10 pb-4 pt-2 hover:text-cyan-deep transition-colors"
+              className="text-3xl font-display text-cream border-b border-cream/10 pb-4 pt-2 hover:text-cyan transition-colors"
             >
-              <span className="font-chalk text-cyan-deep text-xl mr-2">0{i + 1}.</span>
+              <span className="font-chalk text-cyan text-xl mr-2">0{i + 1}.</span>
               {l.label}
             </a>
           ))}
@@ -114,7 +117,7 @@ export function Header() {
           </a>
           <a
             href={`tel:${CONTACT.phoneIntl}`}
-            className="text-center text-wood font-semibold pt-2"
+            className="text-center text-sun/80 font-semibold pt-2"
           >
             {CONTACT.phone}
           </a>

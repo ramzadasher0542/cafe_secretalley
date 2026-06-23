@@ -6,7 +6,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-jakarta);
+  --font-sans: var(--font-outfit), var(--font-jakarta);
   --font-display: var(--font-bungee);
   --font-chalk: var(--font-kalam);
   --font-marker: var(--font-permanent);
@@ -45,76 +45,78 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* ====== Café Secret Alley — Brand Palette (sampled from SA Logo.jpg) ====== */
-  --color-cyan: #42D2E0;          /* primary accent — sampled from logo */
-  --color-cyan-deep: #2BAFC0;     /* hover/pressed state */
-  --color-cyan-glow: #7EE3EC;     /* soft tint */
-  --color-sun: #FEF852;           /* secondary accent — sampled from logo */
-  --color-sun-deep: #F0DE1A;      /* hover/pressed state */
-  --color-mint: #83E3B3;          /* tertiary accent — leaf in logo */
-  --color-espresso: #212424;      /* dark sections — NOT pure black */
-  --color-espresso-2: #2C2A26;    /* slightly warmer dark */
-  --color-espresso-3: #3A352D;    /* card surfaces on dark */
-  --color-cream: #F8F1E4;         /* light sections — warm creamy off-white */
-  --color-cream-2: #FBF6EC;       /* near-cream, lighter */
-  --color-wood: #8B5A2B;          /* warm wood tone */
+  /* ====== Café Secret Alley — Brand Palette (User-specified Higsfield aesthetic) ====== */
+  --color-cyan: #28C4D9;           /* Street-Art Cyan — primary accent */
+  --color-cyan-deep: #1EA8BC;      /* hover/pressed state */
+  --color-cyan-glow: #6EDCE9;      /* soft tint */
+  --color-cyan-light: #B4EEF4;     /* ultra-light tint */
+  --color-sun: #FFD500;            /* Sunshine Yellow — secondary accent */
+  --color-sun-deep: #E6BF00;       /* hover/pressed state */
+  --color-sun-glow: #FFEC80;       /* soft tint */
+  --color-mint: #83E3B3;           /* tertiary accent — leaf/veg */
+  --color-espresso: #1A120B;       /* Espresso Brown — dark sections/cards/footer */
+  --color-espresso-2: #2C2218;     /* slightly warmer dark */
+  --color-espresso-3: #3D3024;     /* card surfaces on dark */
+  --color-cream: #F9F6F0;          /* Creamy Off-White — light background */
+  --color-cream-2: #FBF8F2;        /* near-cream, lighter */
+  --color-wood: #8B5A2B;           /* warm wood tone */
   --color-wood-light: #C8975F;
 }
 
 :root {
   --radius: 0.75rem;
-  --background: #F8F1E4;
-  --foreground: #212424;
-  --card: #FBF6EC;
-  --card-foreground: #212424;
-  --popover: #FBF6EC;
-  --popover-foreground: #212424;
-  --primary: #42D2E0;
-  --primary-foreground: #212424;
-  --secondary: #FEF852;
-  --secondary-foreground: #212424;
-  --muted: #EFE6D2;
+  --background: #F9F6F0;
+  --foreground: #1A120B;
+  --card: #FBF8F2;
+  --card-foreground: #1A120B;
+  --popover: #FBF8F2;
+  --popover-foreground: #1A120B;
+  --primary: #28C4D9;
+  --primary-foreground: #1A120B;
+  --secondary: #FFD500;
+  --secondary-foreground: #1A120B;
+  --muted: #EFE8D8;
   --muted-foreground: #6B5D45;
-  --accent: #FEF852;
-  --accent-foreground: #212424;
+  --accent: #FFD500;
+  --accent-foreground: #1A120B;
   --destructive: #C8362A;
-  --border: #E5DCC6;
-  --input: #E5DCC6;
-  --ring: #42D2E0;
-  --chart-1: #42D2E0;
-  --chart-2: #FEF852;
+  --border: #E8DFCA;
+  --input: #E8DFCA;
+  --ring: #28C4D9;
+  --chart-1: #28C4D9;
+  --chart-2: #FFD500;
   --chart-3: #83E3B3;
   --chart-4: #8B5A2B;
   --chart-5: #C8362A;
-  --sidebar: #F8F1E4;
-  --sidebar-foreground: #212424;
-  --sidebar-primary: #42D2E0;
-  --sidebar-primary-foreground: #212424;
-  --sidebar-accent: #FEF852;
-  --sidebar-accent-foreground: #212424;
-  --sidebar-border: #E5DCC6;
-  --sidebar-ring: #42D2E0;
+  --sidebar: #F9F6F0;
+  --sidebar-foreground: #1A120B;
+  --sidebar-primary: #28C4D9;
+  --sidebar-primary-foreground: #1A120B;
+  --sidebar-accent: #FFD500;
+  --sidebar-accent-foreground: #1A120B;
+  --sidebar-border: #E8DFCA;
+  --sidebar-ring: #28C4D9;
 }
 
 .dark {
-  --background: #212424;
-  --foreground: #F8F1E4;
-  --card: #2C2A26;
-  --card-foreground: #F8F1E4;
-  --popover: #2C2A26;
-  --popover-foreground: #F8F1E4;
-  --primary: #42D2E0;
-  --primary-foreground: #212424;
-  --secondary: #FEF852;
-  --secondary-foreground: #212424;
-  --muted: #3A352D;
+  --background: #1A120B;
+  --foreground: #F9F6F0;
+  --card: #2C2218;
+  --card-foreground: #F9F6F0;
+  --popover: #2C2218;
+  --popover-foreground: #F9F6F0;
+  --primary: #28C4D9;
+  --primary-foreground: #1A120B;
+  --secondary: #FFD500;
+  --secondary-foreground: #1A120B;
+  --muted: #3D3024;
   --muted-foreground: #B5A788;
-  --accent: #FEF852;
-  --accent-foreground: #212424;
+  --accent: #FFD500;
+  --accent-foreground: #1A120B;
   --destructive: #E55A4E;
-  --border: #3A352D;
-  --input: #3A352D;
-  --ring: #42D2E0;
+  --border: #3D3024;
+  --input: #3D3024;
+  --ring: #28C4D9;
 }
 
 @layer base {
@@ -130,8 +132,8 @@
     font-feature-settings: "ss01", "cv11";
   }
   ::selection {
-    background: #FEF852;
-    color: #212424;
+    background: #FFD500;
+    color: #1A120B;
   }
 }
 
@@ -139,10 +141,10 @@
 
 /* Slate texture for dark cards — subtle noise + diagonal weave */
 .slate-texture {
-  background-color: #2C2A26;
+  background-color: #2C2218;
   background-image:
-    radial-gradient(circle at 20% 20%, rgba(66, 210, 224, 0.04) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(254, 248, 82, 0.04) 0%, transparent 45%),
+    radial-gradient(circle at 20% 20%, rgba(40, 196, 217, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255, 213, 0, 0.04) 0%, transparent 45%),
     repeating-linear-gradient(135deg, rgba(255,255,255,0.012) 0 2px, transparent 2px 6px),
     repeating-linear-gradient(45deg, rgba(0,0,0,0.04) 0 2px, transparent 2px 6px);
   position: relative;
@@ -160,17 +162,17 @@
 
 /* Espresso texture — for footer / dark sections */
 .espresso-texture {
-  background-color: #212424;
+  background-color: #1A120B;
   background-image:
-    radial-gradient(circle at 10% 10%, rgba(66, 210, 224, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 90% 90%, rgba(254, 248, 82, 0.04) 0%, transparent 55%),
+    radial-gradient(circle at 10% 10%, rgba(40, 196, 217, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 90% 90%, rgba(255, 213, 0, 0.05) 0%, transparent 55%),
     repeating-linear-gradient(135deg, rgba(255,255,255,0.008) 0 2px, transparent 2px 5px);
 }
 
 /* Chalk handwriting text effect */
 .chalk-text {
-  color: #F8F1E4;
-  text-shadow: 0 0 1px rgba(248,241,228,0.3);
+  color: #F9F6F0;
+  text-shadow: 0 0 1px rgba(249,246,240,0.3);
   letter-spacing: 0.01em;
 }
 
@@ -186,7 +188,7 @@
   right: 0;
   bottom: -0.35em;
   height: 0.35em;
-  background: #FEF852;
+  background: #FFD500;
   border-radius: 999px;
   transform: skewX(-12deg);
   z-index: -1;
@@ -195,36 +197,37 @@
 
 /* Cyan variant */
 .paint-underline-cyan::after {
-  background: #42D2E0;
+  background: #28C4D9;
 }
 
-/* Frosted glass card */
+/* Frosted glass card — premium glassmorphism */
 .glass {
-  background: rgba(248, 241, 228, 0.18);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(248, 241, 228, 0.35);
+  background: rgba(249, 246, 240, 0.2);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow:
-    0 8px 32px rgba(33, 36, 36, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    0 8px 32px rgba(26, 18, 11, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 .glass-dark {
-  background: rgba(33, 36, 36, 0.55);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid rgba(248, 241, 228, 0.12);
+  background: rgba(26, 18, 11, 0.55);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(249, 246, 240, 0.12);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.25),
+    0 8px 32px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-/* Hover lift */
+/* Hover lift — premium micro-interaction */
 .hover-lift {
-  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
-              box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .hover-lift:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(26, 18, 11, 0.15);
 }
 
 /* Floating animations */
@@ -266,15 +269,26 @@
   transform: scale(1.1);
 }
 
+/* Shimmer — premium gradient sweep */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,213,0,0.15) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: #F8F1E4; }
+::-webkit-scrollbar-track { background: #F9F6F0; }
 ::-webkit-scrollbar-thumb {
-  background: #212424;
+  background: #1A120B;
   border-radius: 999px;
-  border: 2px solid #F8F1E4;
+  border: 2px solid #F9F6F0;
 }
-::-webkit-scrollbar-thumb:hover { background: #42D2E0; }
+::-webkit-scrollbar-thumb:hover { background: #28C4D9; }
 
 /* Masonry */
 .masonry { column-gap: 0.75rem; }
@@ -285,7 +299,7 @@
   position: absolute;
   width: 110px;
   height: 28px;
-  background: rgba(254, 248, 82, 0.55);
+  background: rgba(255, 213, 0, 0.55);
   top: -14px;
   left: 50%;
   transform: translateX(-50%) rotate(-3deg);
@@ -299,8 +313,16 @@
 
 /* Text drop shadow for legibility over photos (no dark overlays!) */
 .text-shadow-soft {
-  text-shadow: 0 2px 24px rgba(33, 36, 36, 0.55), 0 1px 4px rgba(33, 36, 36, 0.35);
+  text-shadow: 0 2px 24px rgba(26, 18, 11, 0.55), 0 1px 4px rgba(26, 18, 11, 0.35);
 }
 .text-shadow-strong {
-  text-shadow: 0 4px 32px rgba(33, 36, 36, 0.75), 0 2px 8px rgba(33, 36, 36, 0.5);
+  text-shadow: 0 4px 32px rgba(26, 18, 11, 0.75), 0 2px 8px rgba(26, 18, 11, 0.5);
+}
+
+/* Street-art spray paint splatter (decorative) */
+.spray-dot {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.08;
 }

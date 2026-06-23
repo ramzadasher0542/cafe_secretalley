@@ -34,7 +34,7 @@ export function Story() {
                 <img
                   src="/images-optimized/dashboard.webp"
                   alt="Wooden counter with chalkboard menu and pineapple decor at Cafe Secret Alley"
-                  className="w-full aspect-[4/3] object-cover"
+                  className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-500"
                 />
               </div>
 
@@ -86,7 +86,7 @@ export function Story() {
               ].map((f) => (
                 <div
                   key={f.label}
-                  className="bg-cream-2 rounded-2xl p-4 border border-espresso/10 shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-cyan/40 transition-all"
+                  className="bg-cream-2 rounded-2xl p-4 border border-espresso/10 shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-cyan/40 transition-all duration-300"
                 >
                   <f.icon className="w-5 h-5 text-cyan-deep mb-2" />
                   <div className="font-bold text-sm text-espresso">{f.label}</div>

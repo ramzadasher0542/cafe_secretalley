@@ -101,7 +101,7 @@ export function SocialProof() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="relative bg-cream rounded-2xl p-6 sm:p-7 shadow-xl hover:-translate-y-1 transition-transform"
+                className="relative bg-cream rounded-2xl p-6 sm:p-7 shadow-xl hover:-translate-y-1 transition-transform duration-300"
               >
                 <Quote className="absolute -top-3 -left-3 w-8 h-8 text-cyan fill-cyan" />
                 <div className="flex gap-1 mb-3">
