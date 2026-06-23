@@ -1,4 +1,26 @@
-// Menu data — single source of truth for the chalkboard menu
+/**
+ * ============================================================================
+ *  CAFE SECRET ALLEY — MENU DATA
+ * ============================================================================
+ *  This is the SINGLE source of truth for the chalkboard menu.
+ *
+ *  ── TO ADD A NEW MENU ITEM ──────────────────────────────────────────────
+ *  Find the category below, then copy any existing item object and edit it:
+ *
+ *    {
+ *      name: "Item Name",              // required — shown in chalk font
+ *      price: "1,290",                 // optional — LKR amount as a string
+ *      note: "Short description",      // optional — small caption
+ *      tag: "signature",               // optional — "signature" | "veg" | "spicy" | "new"
+ *    },
+ *
+ *  ── TO ADD A NEW CATEGORY ───────────────────────────────────────────────
+ *  Copy a category object below, give it a unique `id`, and add it to MENU.
+ *  Then update the bento grid spans in MenuSection.tsx (instructions.md
+ *  explains exactly which lines to edit).
+ * ============================================================================
+ */
+
 export type MenuItem = {
   name: string;
   price?: string;
@@ -15,15 +37,6 @@ export type MenuCategory = {
 
 export const MENU: MenuCategory[] = [
   {
-    id: "smoothie-bowls",
-    title: "Smoothie Bowls",
-    subtitle: "Tropical. Bright. Built for the Kandy heat.",
-    items: [
-      { name: "Tropical Smoothie Bowl", tag: "signature", note: "Mango · banana · granola · coconut" },
-      { name: "Sunshine Bliss", price: "1,990", note: "Papaya · passionfruit · honeycomb" },
-    ],
-  },
-  {
     id: "caffeine-supply",
     title: "Caffeine Supply",
     subtitle: "Micro-roasted in-house. Pulled with care.",
@@ -31,6 +44,15 @@ export const MENU: MenuCategory[] = [
       { name: "Americano", price: "350", tag: "signature" },
       { name: "Cappuccino", note: "Micro-roasted specialty coffee" },
       { name: "Latte with Coconut Milk", note: "Oat · soy also available" },
+    ],
+  },
+  {
+    id: "smoothie-bowls",
+    title: "Smoothie Bowls",
+    subtitle: "Tropical. Bright. Built for the Kandy heat.",
+    items: [
+      { name: "Tropical Smoothie Bowl", tag: "signature", note: "Mango · banana · granola · coconut" },
+      { name: "Sunshine Bliss", price: "1,990", note: "Papaya · passionfruit · honeycomb" },
     ],
   },
   {

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bungee, Caveat, Permanent_Marker, Plus_Jakarta_Sans } from "next/font/google";
+import { Bungee, Caveat, Kalam, Permanent_Marker, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -16,9 +16,10 @@ const bungee = Bungee({
   display: "swap",
 });
 
-const caveat = Caveat({
-  variable: "--font-caveat",
+const kalam = Kalam({
+  variable: "--font-kalam",
   subsets: ["latin"],
+  weight: ["300", "400", "700"],
   display: "swap",
 });
 
@@ -26,6 +27,12 @@ const permanent = Permanent_Marker({
   variable: "--font-permanent",
   subsets: ["latin"],
   weight: "400",
+  display: "swap",
+});
+
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -45,7 +52,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Cafe Secret Alley" }],
   icons: {
-    icon: "/images-optimized/logo.webp",
+    icon: "/images-optimized/favicon.png",
   },
   openGraph: {
     title: "Cafe Secret Alley · Kandy's Best Kept Secret",
@@ -72,7 +79,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${jakarta.variable} ${bungee.variable} ${caveat.variable} ${permanent.variable} antialiased bg-background text-foreground font-sans`}
+        className={`${jakarta.variable} ${bungee.variable} ${kalam.variable} ${permanent.variable} ${caveat.variable} antialiased bg-background text-foreground font-sans`}
       >
         {children}
         <Toaster />

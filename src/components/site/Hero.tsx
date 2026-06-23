@@ -37,7 +37,8 @@ export function Hero() {
   }, [next]);
 
   return (
-    <section id="top" className="relative min-h-[100svh] w-full overflow-hidden bg-chalk">
+    <section id="top" className="relative min-h-[100svh] w-full overflow-hidden bg-espresso">
+      {/* === Slides === — NO dark overlays; vibrant photos stay untouched */}
       {SLIDES.map((s, idx) => (
         <div
           key={s.src}
@@ -55,80 +56,89 @@ export function Hero() {
             }}
             loading={idx === 0 ? "eager" : "lazy"}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-chalk/85 via-chalk/25 to-chalk/55" />
-          <div className="absolute inset-0 bg-gradient-to-r from-chalk/70 via-transparent to-transparent" />
         </div>
       ))}
 
+      {/* === Content === — text floats on a frosted glass card, NO image dimming */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[100svh] flex flex-col justify-center pt-24 pb-28">
-        <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 bg-sunshine text-chalk px-3 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-5 shadow-md">
-            <span className="w-1.5 h-1.5 rounded-full bg-chalk animate-pulse" />
-            Kandy · Sri Lanka
+        <div className="max-w-2xl">
+          {/* Glass card */}
+          <div className="glass rounded-[28px] p-7 sm:p-10 hover-lift">
+            {/* Eyebrow */}
+            <div className="inline-flex items-center gap-2 bg-sun text-espresso px-3 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-5 shadow-md">
+              <span className="w-1.5 h-1.5 rounded-full bg-espresso animate-pulse" />
+              Kandy · Sri Lanka
+            </div>
+
+            {/* Headline — dark text on the light glass card = readable without dimming image */}
+            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl text-espresso leading-[0.92] tracking-tight">
+              Kandy&rsquo;s Best
+              <br />
+              Kept <span className="text-cyan-deep">Secret</span>
+            </h1>
+
+            {/* Subheadline */}
+            <p className="mt-5 text-base sm:text-lg text-espresso/85 max-w-xl leading-relaxed font-medium">
+              A vibrant modern Australian–Sri Lankan fusion café hidden in the heart of the city.{" "}
+              <span className="font-bold text-espresso">Specialty coffee</span>,{" "}
+              <span className="font-bold text-espresso">all-day brunch</span>, and{" "}
+              <span className="font-bold text-espresso">curated cocktails</span>.
+            </p>
+
+            {/* CTAs — hover-lift on primary */}
+            <div className="mt-7 flex flex-col sm:flex-row gap-3">
+              <a
+                href="#menu"
+                className="group inline-flex items-center justify-center gap-2 bg-espresso text-cream px-7 py-4 rounded-full font-display text-base tracking-wide shadow-lg hover:bg-cyan hover:text-espresso hover:-translate-y-1 transition-all duration-300"
+              >
+                <Coffee className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                Explore Menu
+              </a>
+              <a
+                href={CONTACT.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center justify-center gap-2 bg-cyan text-espresso px-7 py-4 rounded-full font-display text-base tracking-wide shadow-lg hover:bg-sun hover:-translate-y-1 transition-all duration-300"
+              >
+                <MapPin className="w-5 h-5" />
+                Find the Alley
+              </a>
+            </div>
           </div>
 
-          <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl text-cream leading-[0.92] tracking-tight">
-            Kandy&rsquo;s Best
-            <br />
-            Kept <span className="text-sunshine">Secret</span>
-          </h1>
-
-          <p className="mt-6 text-base sm:text-xl text-cream/90 max-w-2xl leading-relaxed font-medium">
-            A vibrant modern Australian–Sri Lankan fusion café hidden in the heart of the city.
-            <span className="text-sunshine font-bold"> Specialty coffee</span>,
-            <span className="text-sunshine font-bold"> all-day brunch</span>, and
-            <span className="text-sunshine font-bold"> curated cocktails</span>.
-          </p>
-
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <a
-              href="#menu"
-              className="group inline-flex items-center justify-center gap-2 bg-sunshine text-chalk px-7 py-4 rounded-full font-display text-base tracking-wide shadow-[0_8px_0_0_#C18A0A] hover:shadow-[0_4px_0_0_#C18A0A] hover:translate-y-1 transition-all"
-            >
-              <Coffee className="w-5 h-5" />
-              Explore Menu
-            </a>
-            <a
-              href={CONTACT.mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center justify-center gap-2 bg-cream/10 backdrop-blur-md text-cream border-2 border-cream/60 px-7 py-4 rounded-full font-display text-base tracking-wide hover:bg-cream hover:text-chalk transition-all"
-            >
-              <MapPin className="w-5 h-5" />
-              Find the Alley
-            </a>
-          </div>
-
-          <div className="mt-12 flex items-center gap-4 text-cream/80">
-            <div className="font-chalk text-2xl text-sunshine">{SLIDES[i].caption}</div>
-            <div className="h-px flex-1 bg-cream/30 max-w-[80px]" />
+          {/* Caption strip — uses text-shadow for legibility (no overlays) */}
+          <div className="mt-6 flex items-center gap-4 text-cream text-shadow-soft">
+            <div className="font-chalk text-2xl text-sun">{SLIDES[i].caption}</div>
+            <div className="h-px flex-1 bg-cream/40 max-w-[80px]" />
             <div className="font-chalk text-lg">{SLIDES[i].sub}</div>
           </div>
         </div>
       </div>
 
+      {/* Slider controls (desktop) */}
       <div className="absolute bottom-8 right-4 sm:right-8 z-20 flex items-center gap-3">
         <button
           onClick={prev}
           aria-label="Previous slide"
-          className="w-11 h-11 rounded-full border-2 border-cream/60 text-cream grid place-items-center hover:bg-sunshine hover:text-chalk hover:border-sunshine transition-colors"
+          className="w-11 h-11 rounded-full glass text-cream grid place-items-center hover:bg-sun hover:text-espresso transition-colors"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
-        <div className="font-display text-cream text-sm tracking-widest">
-          <span className="text-sunshine">{String(i + 1).padStart(2, "0")}</span>
-          <span className="mx-1 opacity-50">/</span>
+        <div className="font-display text-cream text-sm tracking-widest text-shadow-soft">
+          <span className="text-sun">{String(i + 1).padStart(2, "0")}</span>
+          <span className="mx-1 opacity-60">/</span>
           <span>{String(SLIDES.length).padStart(2, "0")}</span>
         </div>
         <button
           onClick={next}
           aria-label="Next slide"
-          className="w-11 h-11 rounded-full border-2 border-cream/60 text-cream grid place-items-center hover:bg-sunshine hover:text-chalk hover:border-sunshine transition-colors"
+          className="w-11 h-11 rounded-full glass text-cream grid place-items-center hover:bg-sun hover:text-espresso transition-colors"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
       </div>
 
+      {/* Slide dots (mobile) */}
       <div className="absolute bottom-8 left-4 sm:left-8 z-20 flex items-center gap-2">
         {SLIDES.map((_, idx) => (
           <button
@@ -136,15 +146,16 @@ export function Hero() {
             onClick={() => setI(idx)}
             aria-label={`Go to slide ${idx + 1}`}
             className={`h-1.5 rounded-full transition-all ${
-              i === idx ? "w-8 bg-sunshine" : "w-3 bg-cream/50"
+              i === idx ? "w-8 bg-sun" : "w-3 bg-cream/60"
             }`}
           />
         ))}
       </div>
 
+      {/* Scroll hint */}
       <a
         href="#story"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 hidden sm:flex flex-col items-center gap-1 text-cream/70 hover:text-sunshine transition-colors"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 hidden sm:flex flex-col items-center gap-1 text-cream/85 hover:text-sun transition-colors text-shadow-soft"
         aria-label="Scroll to story"
       >
         <span className="text-[10px] tracking-[0.3em] uppercase font-bold">Scroll</span>

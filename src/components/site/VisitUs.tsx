@@ -11,44 +11,47 @@ export function VisitUs() {
       label: "Find Us",
       lines: [CONTACT.address],
       action: { href: CONTACT.mapsUrl, text: "Open in Google Maps" },
-      accent: "bg-sunshine text-chalk",
+      accent: "bg-sun text-espresso",
     },
     {
       icon: Clock,
       label: "Opening Hours",
       lines: ["Open Daily", "7:00 AM – 9:00 PM"],
-      accent: "bg-street text-cream",
+      accent: "bg-cyan text-espresso",
     },
     {
       icon: Phone,
       label: "Call to Book",
       lines: [CONTACT.phone],
       action: { href: `tel:${CONTACT.phoneIntl}`, text: "Tap to call" },
-      accent: "bg-wood text-cream",
+      accent: "bg-mint text-espresso",
     },
     {
       icon: Wallet,
       label: "Price Range",
       lines: [CONTACT.priceRange, "per person"],
-      accent: "bg-chalk text-cream",
+      accent: "bg-espresso text-cream",
     },
   ];
 
   return (
     <section id="visit" className="relative py-20 sm:py-28 lg:py-32 bg-cream overflow-hidden">
-      <div className="absolute top-0 right-0 w-72 h-72 rounded-full bg-sunshine/20 blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-72 h-72 rounded-full bg-cyan/15 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full bg-sun/20 blur-3xl pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <div className="text-center mb-14 sm:mb-20">
           <div className="font-chalk text-3xl sm:text-4xl text-wood">come say hi</div>
-          <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl text-street mt-1">
-            VISIT <span className="paint-underline">US</span>
+          <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl text-espresso mt-1">
+            VISIT <span className="paint-underline paint-underline-cyan">US</span>
           </h2>
-          <p className="font-chalk text-xl sm:text-2xl text-street/60 mt-4">
+          <p className="font-chalk text-xl sm:text-2xl text-espresso/60 mt-4">
             tucked away on E L Senanayake Veediya
           </p>
         </div>
 
+        {/* Info cards grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
           {cards.map((c, i) => (
             <motion.div
@@ -57,16 +60,16 @@ export function VisitUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="bg-white rounded-3xl p-6 shadow-md border border-street/5 hover:shadow-xl hover:-translate-y-1 transition-all"
+              className="bg-cream-2 rounded-3xl p-6 shadow-md border border-espresso/8 hover:shadow-xl hover:-translate-y-1 hover:border-cyan/40 transition-all"
             >
-              <div className={`w-12 h-12 rounded-2xl ${c.accent} grid place-items-center mb-4`}>
+              <div className={`w-12 h-12 rounded-2xl ${c.accent} grid place-items-center mb-4 shadow-sm`}>
                 <c.icon className="w-6 h-6" />
               </div>
               <div className="text-xs font-bold uppercase tracking-widest text-wood mb-2">
                 {c.label}
               </div>
               {c.lines.map((l) => (
-                <div key={l} className="text-street font-semibold leading-snug">
+                <div key={l} className="text-espresso font-semibold leading-snug">
                   {l}
                 </div>
               ))}
@@ -75,7 +78,7 @@ export function VisitUs() {
                   href={c.action.href}
                   target={c.action.href.startsWith("http") ? "_blank" : undefined}
                   rel={c.action.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-street hover:text-sunshine-deep transition-colors"
+                  className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-cyan-deep hover:text-sun-deep transition-colors"
                 >
                   {c.action.text}
                   <Navigation className="w-3.5 h-3.5" />
@@ -85,13 +88,15 @@ export function VisitUs() {
           ))}
         </div>
 
+        {/* Map + social split */}
         <div className="grid lg:grid-cols-3 gap-6">
+          {/* Map */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-2 rounded-3xl overflow-hidden shadow-xl border-4 border-white min-h-[400px] relative bg-street/10"
+            className="lg:col-span-2 rounded-3xl overflow-hidden shadow-xl border-4 border-cream-2 min-h-[400px] relative bg-cyan/10"
           >
             <iframe
               title="Cafe Secret Alley location on Google Maps"
@@ -103,15 +108,16 @@ export function VisitUs() {
             />
           </motion.div>
 
+          {/* Social + booking */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="rounded-3xl bg-street text-cream p-7 sm:p-8 flex flex-col justify-between shadow-xl"
+            className="rounded-3xl espresso-texture text-cream p-7 sm:p-8 flex flex-col justify-between shadow-xl"
           >
             <div>
-              <div className="font-chalk text-2xl text-sunshine">stay connected</div>
+              <div className="font-chalk text-2xl text-sun">stay connected</div>
               <h3 className="font-display text-2xl sm:text-3xl mt-1">FOLLOW THE ALLEY</h3>
               <p className="text-cream/70 mt-3 text-sm leading-relaxed">
                 Daily specials, secret menu drops, and behind-the-counter moments.
@@ -123,7 +129,7 @@ export function VisitUs() {
                 href={CONTACT.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 bg-cream/10 hover:bg-sunshine hover:text-chalk transition-colors rounded-2xl px-4 py-3.5 group"
+                className="flex items-center gap-3 bg-cream/10 hover:bg-cyan hover:text-espresso transition-colors rounded-2xl px-4 py-3.5 group"
               >
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500 grid place-items-center">
                   <Instagram className="w-5 h-5 text-white" />
@@ -138,7 +144,7 @@ export function VisitUs() {
                 href={CONTACT.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 bg-cream/10 hover:bg-sunshine hover:text-chalk transition-colors rounded-2xl px-4 py-3.5 group"
+                className="flex items-center gap-3 bg-cream/10 hover:bg-cyan hover:text-espresso transition-colors rounded-2xl px-4 py-3.5 group"
               >
                 <div className="w-10 h-10 rounded-full bg-blue-600 grid place-items-center">
                   <Facebook className="w-5 h-5 text-white" />
@@ -153,7 +159,7 @@ export function VisitUs() {
                 href={CONTACT.ubereats}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 bg-cream/10 hover:bg-sunshine hover:text-chalk transition-colors rounded-2xl px-4 py-3.5 group"
+                className="flex items-center gap-3 bg-cream/10 hover:bg-cyan hover:text-espresso transition-colors rounded-2xl px-4 py-3.5 group"
               >
                 <div className="w-10 h-10 rounded-full bg-green-600 grid place-items-center">
                   <ShoppingBag className="w-5 h-5 text-white" />

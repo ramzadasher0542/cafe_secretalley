@@ -1,132 +1,249 @@
-# Cafe Secret Alley — How to Add Your Own Photos
+# Cafe Secret Alley — How to Add New Photos & Menu Items
 
-This guide walks you through adding your own menu item photos and gallery images to the Cafe Secret Alley website. No coding experience needed — just follow the steps below.
-
----
-
-## 📁 Where things live
-
-| Folder | What goes here |
-|--------|----------------|
-| `/public/images-optimized/` | All current optimized WebP images used on the live site |
-| `/public/images-raw/` | (Create this) — drop your original photos here before optimizing |
-| `/scripts/optimize-images.js` | Script that converts + color-grades your photos to WebP |
+> A friendly, no-code-required guide for the café owner.
+> Estimated time per new photo: **2 minutes**.
 
 ---
 
-## ☕ Adding Menu Item Photos
+## Table of Contents
+1. [Where things live](#1-where-things-live)
+2. [Adding a new gallery photo](#2-adding-a-new-gallery-photo)
+3. [Adding a new menu item](#3-adding-a-new-menu-item)
+4. [Adding a whole new menu category](#4-adding-a-whole-new-menu-category)
+5. [Image size & quality guidelines](#5-image-size--quality-guidelines)
+6. [Troubleshooting](#6-troubleshooting)
 
-The current menu is a stylized **digital chalkboard** with text-only items. If you want to add a photo for a specific menu item (e.g., Turkish Eggs), follow these steps:
+---
 
-### Step 1 — Add your photo
-1. Drop your photo (`.jpg` or `.png`) into `/public/images-raw/`
-   - If the folder doesn't exist, create it.
-2. Name it clearly, e.g., `turkish-eggs.jpg`, `tropical-smoothie-bowl.jpg`.
+## 1. Where things live
 
-### Step 2 — Optimize it
-Open `/scripts/optimize-images.js` and add a new entry to the `jobs` array:
+| Folder / File | What it is |
+|---------------|------------|
+| `/public/images-raw/` | Drop your new photos here (JPG or PNG, any size) |
+| `/public/images-optimized/` | The optimized WebP versions used by the website (auto-generated) |
+| `/scripts/optimize-images.js` | The script that converts your raw photos → optimized WebP |
+| `/src/lib/gallery-data.ts` | The list of photos shown in the Gallery section |
+| `/src/lib/cafe-data.ts` | The list of menu items, prices, contact info |
+
+> **Tip:** Create the `images-raw` folder if it doesn't exist yet: just right-click → New Folder.
+
+---
+
+## 2. Adding a new gallery photo
+
+### Step 1 — Drop your photo
+Put your photo (e.g., `my-new-coffee.jpg`) into `/public/images-raw/`.
+
+### Step 2 — Add it to the optimize script
+Open `/scripts/optimize-images.js` in any text editor. Find the `jobs` list (it looks like this):
 
 ```js
-{ in: 'turkish-eggs.jpg', out: 'turkish-eggs.webp', width: 800 },
+const jobs = [
+  { in: 'hero-exterior.png',  out: 'hero-exterior.webp',  width: 2400 },
+  { in: 'hero-interior.png',  out: 'hero-interior.webp',  width: 2400 },
+  // ...more entries...
+];
 ```
 
-Then run from the project root:
+Add a new line at the bottom of the list (before the closing `];`):
+
+```js
+  { in: 'my-new-coffee.jpg', out: 'my-new-coffee.webp', width: 1400 },
+```
+
+### Step 3 — Run the optimizer
+Open a terminal in the project folder and run:
 
 ```bash
 node scripts/optimize-images.js
 ```
 
-The optimized WebP will appear in `/public/images-optimized/`.
+You should see `OK my-new-coffee.webp (0.X MB)`. The optimized file now lives in `/public/images-optimized/`.
 
-### Step 3 — Wire it into the menu
-Open `/src/lib/cafe-data.ts`. Find the menu item you want to update and add an `image` field:
+### Step 4 — Add it to the gallery list
+Open `/src/lib/gallery-data.ts`. Scroll to the `GALLERY_TILES` array — it looks like this:
 
 ```ts
-{ name: "Turkish Eggs", price: "2,090", tag: "signature",
-  note: "Garlic yoghurt · chilli butter · sourdough",
-  image: "/images-optimized/turkish-eggs.webp" },
+export const GALLERY_TILES: GalleryTile[] = [
+  {
+    src: "/images-optimized/hero-exterior.webp",
+    alt: "Outdoor blue wall with large yellow SECRET text at Cafe Secret Alley",
+    caption: "the blue & yellow wall",
+    tall: true,    // optional — makes it portrait (3:4)
+  },
+  // ...more entries...
+];
 ```
 
-Then open `/src/components/site/MenuSection.tsx` and update the item renderer to show the image when present. Look for the `<li key={item.name}>` block and add at the top of the `<div>` content:
+Copy any block and edit it. For example, paste this at the end (before the closing `];`):
 
-```tsx
-{item.image && (
-  <img
-    src={item.image}
-    alt={item.name}
-    loading="lazy"
-    className="w-full h-32 object-cover rounded-xl mb-2"
-  />
-)}
+```ts
+  {
+    src: "/images-optimized/my-new-coffee.webp",
+    alt: "A close-up of our micro-roasted flat white",
+    caption: "morning fuel",
+    wide: true,    // optional — makes it landscape (4:3)
+  },
 ```
 
-### Step 4 — Save and refresh
-The dev server auto-reloads. Check the Preview Panel to see your photo live in the menu.
+### Step 5 — Save & check the preview
+Save the file. The dev server auto-reloads — check the Preview Panel. Your new photo will appear in the masonry grid automatically. The layout reflows on its own.
 
 ---
 
-## 🖼️ Adding Gallery Photos
+## 3. Adding a new menu item
 
-The gallery is a masonry layout in `/src/components/site/Gallery.tsx`. Each tile is defined in the `TILES` array at the top of the file.
-
-### Step 1 — Add and optimize your photo
-Same as menu steps 1 & 2 above. Use width `1400` for landscape photos, `1000` for portrait.
-
-### Step 2 — Add a tile
-Open `/src/components/site/Gallery.tsx` and find the `TILES` array. Add a new entry:
+### Step 1 — Open the menu data file
+Open `/src/lib/cafe-data.ts`. Find the category you want to add to (e.g., "Caffeine Supply"):
 
 ```ts
 {
-  src: "/images-optimized/your-new-photo.webp",
-  alt: "Description of the photo for screen readers",
-  caption: "the caption shown in chalk handwriting",
-  tall: true,  // optional: makes it 3:4 portrait
-  // wide: true,  // optional: makes it 4:3 landscape
+  id: "caffeine-supply",
+  title: "Caffeine Supply",
+  subtitle: "Micro-roasted in-house. Pulled with care.",
+  items: [
+    { name: "Americano", price: "350", tag: "signature" },
+    { name: "Cappuccino", note: "Micro-roasted specialty coffee" },
+    { name: "Latte with Coconut Milk", note: "Oat · soy also available" },
+  ],
 },
 ```
 
-### Step 3 — Save and refresh
-The new tile will automatically appear in the masonry grid. The layout re-flows on its own.
+### Step 2 — Add your item
+Inside the `items: [ ... ]` list, add a new line. Copy the format of an existing item. Examples:
 
----
-
-## 🎨 Tips for best results
-
-- **Resolution**: Aim for at least 1200px wide. The optimizer will downscale if needed.
-- **Aspect ratio**: Crop close to 4:3 (landscape) or 3:4 (portrait) for the cleanest layout.
-- **Color tone**: The optimizer applies a warm grade automatically. If your photo is already color-graded, you may want to skip the tint — see the `if (job.in !== 'logo.jpg')` line in the script for how to skip.
-- **File size**: Source photos up to ~10MB are fine. The optimizer will get them under 1MB.
-- **Alt text**: Always write a descriptive `alt` for accessibility and SEO.
-
----
-
-## 🚀 Re-deploying
-
-After you've added photos and confirmed they look good in the Preview Panel, run:
-
-```bash
-bun run build
+**With price:**
+```ts
+    { name: "Flat White", price: "450", note: "Double ristretto · silky microfoam" },
 ```
 
-This produces a production build. The deploy step depends on your hosting (Vercel / Netlify / custom Node server).
+**With signature tag:**
+```ts
+    { name: "Magic", price: "480", tag: "signature", note: "Melbourne-style double ristretto" },
+```
+
+**Just a name (no price):**
+```ts
+    { name: "Filter Coffee" },
+```
+
+### Step 3 — Save & check
+Save the file. The new item appears instantly in the chalkboard menu card. No layout changes needed.
+
+### Field reference
+
+| Field | Required? | What it does |
+|-------|-----------|--------------|
+| `name` | ✅ Yes | The item name, shown in chalk font |
+| `price` | ❌ Optional | LKR amount as a string (e.g., `"350"` or `"1,290"`) |
+| `note` | ❌ Optional | Small description shown below the name |
+| `tag` | ❌ Optional | One of: `"signature"`, `"veg"`, `"spicy"`, `"new"` — adds a colored badge |
 
 ---
 
-## 🆘 Troubleshooting
+## 4. Adding a whole new menu category
 
-**Photo doesn't show up**
+This is a two-step change: add the data, then add a card to the bento grid.
+
+### Step 1 — Add the category to the data file
+In `/src/lib/cafe-data.ts`, add a new category to the `MENU` array:
+
+```ts
+{
+  id: "cocktails",                  // unique id
+  title: "Curated Cocktails",
+  subtitle: "Evening pours. Local spirits.",
+  items: [
+    { name: "Arrack Sour", price: "1,500", tag: "signature", note: "Sri Lankan arrack · lime · egg white" },
+    { name: "G&T Kandy", price: "1,400", note: "Gin · tonic · kaffir lime" },
+  ],
+},
+```
+
+### Step 2 — Add a card to the bento grid
+Open `/src/components/site/MenuSection.tsx`. Near the top, after the existing `const drinks = ...` line, add:
+
+```ts
+const cocktails = MENU.find((c) => c.id === "cocktails")!;
+```
+
+Then scroll down to the bento grid (search for `{/* Bento box grid`). After the last `<motion.div>` block (the Drinks card), add a new one:
+
+```tsx
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-60px" }}
+  transition={{ duration: 0.5, delay: 0.25, ease: "easeOut" }}
+  className="lg:col-span-2"
+>
+  {renderCard(cocktails, "#FEF852")}
+</motion.div>
+```
+
+> **Layout tip:** `lg:col-span-1` = narrow card (1 of 4 columns). `lg:col-span-2` = wide card (2 of 4 columns). `lg:row-span-2` = tall card (spans 2 rows, like Caffeine Supply).
+
+Save both files. Your new category appears in the bento grid.
+
+---
+
+## 5. Image size & quality guidelines
+
+| Where it goes | Recommended dimensions | Recommended `width` in script |
+|---------------|------------------------|-------------------------------|
+| Hero slider | 2400 × 1600 px (landscape) | `2400` |
+| Gallery (landscape) | 1600 × 1200 px | `1400` |
+| Gallery (portrait) | 1200 × 1600 px | `1000` |
+| Menu item photo | 800 × 600 px | `800` |
+
+**Good to know:**
+- The optimizer automatically applies a warm color grade so all photos feel cohesive.
+- Source photos up to ~10MB are fine — the optimizer gets them under 1MB.
+- Photos are converted to WebP for fast loading on mobile.
+- The optimizer auto-rotates phone photos based on EXIF data.
+- Filenames are case-sensitive — `My-Photo.jpg` and `my-photo.jpg` are different.
+
+---
+
+## 6. Troubleshooting
+
+**"My new photo doesn't show up"**
 - Check the `src` path matches exactly (case-sensitive).
 - Confirm the file exists in `/public/images-optimized/`.
-- Check the browser console (F12) for 404 errors.
+- Check the browser console (F12 → Console) for 404 errors.
+- Make sure you ran `node scripts/optimize-images.js` after adding the file.
 
-**Photo looks blurry**
-- Increase the `width` value in the optimize script (e.g., from 800 to 1200).
+**"The optimize script says SKIP (missing)"**
+- The `in:` filename doesn't match a file in `/public/images-raw/`. Check spelling and extension.
+
+**"My photo looks blurry"**
+- Increase the `width` value in the optimize script (e.g., from `1400` to `2000`).
 - Re-run `node scripts/optimize-images.js`.
 
-**Layout looks broken**
-- Make sure you didn't break the JSX structure when editing `Gallery.tsx` or `MenuSection.tsx`.
-- Check the terminal where the dev server runs for compile errors.
+**"The bento grid looks weird after I added a category"**
+- Check that you copied the `<motion.div>` block exactly.
+- Make sure the `className` value is one of: `lg:col-span-1`, `lg:col-span-2`, or `lg:row-span-2`.
+- Each card needs a unique `key` if you add motion divs.
+
+**"I broke the code and don't know how to fix it"**
+- Don't panic. The original files are in version control. Ask your developer friend to run `git diff` to see what changed.
 
 ---
 
-Happy photo-adding! 📸☕
+## Quick command reference
+
+```bash
+# Optimize all raw photos → WebP
+node scripts/optimize-images.js
+
+# Run the website locally (if not already running)
+bun run dev
+
+# Check for code errors
+bun run lint
+```
+
+---
+
+Happy updating! ☕🇱🇰
+If you get stuck, just send a screenshot of the error to your dev friend — they'll know what to do.
