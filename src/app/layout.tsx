@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Bungee, Caveat, Kalam, Outfit, Permanent_Marker, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/toaster";
+
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -88,7 +88,7 @@ export default function RootLayout({
         className={`${outfit.variable} ${jakarta.variable} ${bungee.variable} ${kalam.variable} ${permanent.variable} ${caveat.variable} antialiased bg-background text-foreground font-sans`}
       >
         {children}
-        <Toaster />
+
       </body>
     </html>
   );
